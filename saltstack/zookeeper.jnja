@@ -1,0 +1,17 @@
+template "#{node['apps']['db_home']}/installers/scothena-sor/generated-files/scothena-common.properties" do
+  source "scothena-common.properties.erb"
+  owner node['apps']['owner']
+  group node['apps']['group']
+  mode "755"
+  variables({
+    :zookeeper_discover_ensemble => env_bag['scothena-props']['scothena.discovery.zookeeper.ensemble'],
+    :zookeeper_ensemble => env_bag['scothena-props']['scothena.config.zookeeper.ensemble'],
+    :ganglia_host => env_bag['scothena-props']['scothena.ganglia.host'],
+    :ganglia_port => env_bag['scothena-props']['scothena.ganglia.port'],
+    :ganglia_url => env_bag['scothena-props']['scothena.ganglia.web.url'],
+    :log_file => "#{node['apps']['db_home']}/logs/scothena-sor.log"
+  })
+  subscribes :create_if_missing, resources('rolling_deploy_leg[install to current]'), :immediately
+  subscribes :create, resources('rolling_deploy_leg[install to current]'), :immediately
+
+end
