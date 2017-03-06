@@ -4,6 +4,9 @@
 # Count each response code, again this sounds like every code not just 301s
 # Count 301s / second outputting the total number of requests for each second? 
 # Just define all codes for time and reuse #
+# Turns out this inefficient log parser is very good at parsing most any kind of log. Go figure
+# sometimes the lines are blured between Operational Excellence and hacking scripts. This worked well
+# with some mods against various /var/log/*.logs
 CODE="200"
 CODE2="202"
 CODE3="301"
